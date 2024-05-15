@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <h1 style="color: #DCDCDC; font-weight: bold;">TO-DO LIST KEGIATAN</h1>
-    <form @submit.prevent="addTask">
+  <div class="container">
+    <h1 class="title">TO-DO LIST KEGIATAN</h1>
+    <form @submit.prevent="addTask" class="task-form">
       <input type="text" v-model="newTask" placeholder="Tambahkan Kegiatan Baru">
       <button>Tambahkan</button>
     </form>
-    <ul>
+    <ul class="task-list">
       <li v-for="(task, index) in tasksFiltered" :key="index" class="task-item">
         <button @click="completeTask(index)" :class="{ completedButton: task.completed }">
           <!-- Mengubah warna ceklis menjadi putih -->
@@ -64,11 +64,18 @@ export default {
 </script>
 
 <style>
-h1 {
-  margin-bottom: 20px;
+.container {
+  padding: 20px;
 }
 
-form {
+.title {
+  color: #DCDCDC;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.task-form {
   display: flex;
   margin-bottom: 20px;
 }
@@ -89,12 +96,12 @@ button {
   cursor: pointer;
 }
 
-ul {
+.task-list {
   list-style: none;
   padding: 0;
 }
 
-li {
+.task-item {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
@@ -104,7 +111,7 @@ li {
   padding: 10px; /* Padding untuk ruang di dalam border */
 }
 
-li span {
+.task-item span {
   flex: 1;
   cursor: pointer;
 }
@@ -147,5 +154,39 @@ button.completedButton.completed {
   border: 1px solid #fff; /* Border putih */
   padding: 10px; /* Padding untuk ruang di dalam border */
   border-radius: 15px; /* Sudut border melengkung */
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 1.5em;
+  }
+
+  .task-form {
+    flex-direction: column;
+  }
+
+  input[type="text"] {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .task-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filter-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filter-container label {
+    margin-left: 0;
+    margin-top: 10px;
+  }
 }
 </style>
